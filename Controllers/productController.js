@@ -65,13 +65,13 @@ export const updateProduct = (req, res) => {
   try {
     const productId = req.params.id;
     const { name, price } = req.body;
-    const isExist = products.find((ele) => ele.id == productId);
-    if (isExist) {
-      products[productId].name = name;
-      products[productId].price = price;
+    const index = products.findIndex((ele) => ele.id == productId);
+    if (index !== -1) {
+      products[index].name = name;
+      products[index].price = price;
       return res.status(200).json({
         message: "Product updated successfully",
-        data: products[productId],
+        data: products[index],
       });
     } else {
       return res.status(404).json({ message: "Product not found" });
